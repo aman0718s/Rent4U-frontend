@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - Wheels4U</title>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<header>
+
+    <nav class="navbar">
+
+        <a class="logo" href="index.html">
+            Wheels4U
+        </a>
+
+        <div class="nav-right">
+
+            <span id="welcomeText" class="welcome-text"></span>
+
+            <button class="btn-logout" id="logoutBtn">
+                Logout
+            </button>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+<main>
+
+    <!-- ================= TABS ================= -->
+
+    <div class="tabs">
+
+        <button class="tab-btn active" data-tab="browse">
+            Browse & Rent
+        </button>
+
+        <button class="tab-btn" data-tab="add">
+            Add Vehicle
+        </button>
+
+        <button class="tab-btn" data-tab="myVehicles">
+            My Vehicles
+        </button>
+
+        <button class="tab-btn" data-tab="myBookings">
+            My Bookings
+        </button>
+
+        <button class="tab-btn" data-tab="bookingRequests">
+            Requests <span id="requestsBadge" class="badge" style="display:none;">0</span>
+        </button>
+
+    </div>
+
+
+    <!-- ================= BROWSE & RENT ================= -->
+
+    <section class="tab-panel active" id="browse">
+
+        <div class="panel-head">
+
+            <h2>Search Vehicles</h2>
+
+            <select id="filterType">
+
+                <option value="all">
+                    All Types
+                </option>
+
+                <option value="car">
+                    Car
+                </option>
+
+                <option value="bike">
+                    Bike
+                </option>
+
+                <option value="scooter">
+                    Scooter
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- Search Form -->
+
+        <div class="search-box">
+
+            <!-- Location -->
+
+            <div class="search-field location-field">
+
+                <label>
+                    <i class="fa-solid fa-location-dot"></i>
+                    Location
+                </label>
+
+                <div class="location-input">
+
+                    <input
+                        type="text"
+                        id="searchLocation"
+                        placeholder="Enter area / city">
+
+                    <button
+                        type="button"
+                        class="btn-current-location"
+                        id="useMyLocationBtn">
+
+                        <i class="fa-solid fa-location-crosshairs"></i>
+
+                        Current Location
+
+                    </button>
+
+                </div>
+
+                <small id="locationStatus"></small>
+
+            </div>
+
+
+            <!-- Pickup Date -->
+
+            <div class="search-field">
+
+                <label>
+                    <i class="fa-solid fa-calendar-days"></i>
+                    Pickup Date
+                </label>
+
+                <input
+                    type="date"
+                    id="searchFromDate">
+
+            </div>
+
+
+            <!-- Drop Date -->
+
+            <div class="search-field">
+
+                <label>
+                    <i class="fa-solid fa-calendar-days"></i>
+                    Drop Date
+                </label>
+
+                <input
+                    type="date"
+                    id="searchToDate">
+
+            </div>
+
+
+            <!-- Search Button -->
+
+            <button
+                type="button"
+                class="btn-search"
+                id="searchVehiclesBtn">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                Search Vehicles
+
+            </button>
+
+        </div>
+
+
+        <!-- Search Result Message -->
+
+        <p id="searchMessage" class="search-message">
+            Enter location and dates to search available vehicles.
+        </p>
+
+
+        <!-- Vehicle Results -->
+
+        <div
+            class="vehicle-grid"
+            id="browseGrid">
+        </div>
+
+
+        <p
+            class="empty-msg"
+            id="browseEmpty"
+            style="display:none;">
+
+            No vehicles available for the selected location and dates.
+
+        </p>
+
+    </section>
+
+
+
+    <!-- ================= ADD VEHICLE ================= -->
+
+    <section class="tab-panel" id="add">
+
+        <h2>List Your Vehicle</h2>
+
+        <form
+            id="addVehicleForm"
+            class="vehicle-form">
+
+
+            <div class="form-row">
+
+                <div class="input-box">
+
+                    <label>
+                        Vehicle Type
+                    </label>
+
+                    <select id="vType" required>
+
+                        <option value="" disabled selected>
+                            Select type
+                        </option>
+
+                        <option value="car">
+                            Car
+                        </option>
+
+                        <option value="bike">
+                            Bike
+                        </option>
+
+                        <option value="scooter">
+                            Scooter
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="input-box">
+
+                    <label>
+                        Vehicle Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="vName"
+                        placeholder="e.g. Honda Activa"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="input-box">
+
+                    <label>
+                        Price per day (₹)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="vPrice"
+                        min="1"
+                        placeholder="e.g. 500"
+                        required>
+
+                </div>
+
+
+                <div class="input-box">
+
+                    <label>
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="vLocation"
+                        placeholder="e.g. Sector 62, Noida"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <div class="input-box">
+
+                <label>
+                    Image URL (optional)
+                </label>
+
+                <input
+                    type="url"
+                    id="vImage"
+                    placeholder="https://...">
+
+            </div>
+
+
+            <button
+                type="button"
+                class="btn-locate"
+                id="captureLocationBtn">
+
+                <i class="fa-solid fa-location-crosshairs"></i>
+
+                Use My Current Location
+
+            </button>
+
+
+            <input
+                type="hidden"
+                id="vLat">
+
+            <input
+                type="hidden"
+                id="vLng">
+
+
+            <button type="submit">
+                List Vehicle
+            </button>
+
+        </form>
+
+    </section>
+
+
+
+    <!-- ================= MY VEHICLES ================= -->
+
+    <section class="tab-panel" id="myVehicles">
+
+        <h2>My Listed Vehicles</h2>
+
+        <div
+            class="vehicle-grid"
+            id="myVehiclesGrid">
+        </div>
+
+        <p
+            class="empty-msg"
+            id="myVehiclesEmpty"
+            style="display:none;">
+
+            You haven't listed any vehicle yet.
+
+        </p>
+
+    </section>
+
+
+
+    <!-- ================= MY BOOKINGS ================= -->
+
+    <section class="tab-panel" id="myBookings">
+
+        <h2>My Bookings</h2>
+
+        <div
+            class="booking-list"
+            id="myBookingsList">
+        </div>
+
+        <p
+            class="empty-msg"
+            id="myBookingsEmpty"
+            style="display:none;">
+
+            You haven't booked any vehicle yet.
+
+        </p>
+
+    </section>
+
+
+
+    <!-- ================= BOOKING REQUESTS (OWNER) ================= -->
+
+    <section class="tab-panel" id="bookingRequests">
+
+        <h2>Incoming Booking Requests</h2>
+        <p style="color: #64748b; font-size: 14px; margin-bottom: 20px;">
+            Review and accept or reject rental requests submitted for your vehicles.
+        </p>
+
+        <div
+            class="booking-list"
+            id="bookingRequestsList">
+        </div>
+
+        <p
+            class="empty-msg"
+            id="bookingRequestsEmpty"
+            style="display:none;">
+
+            No incoming booking requests yet.
+
+        </p>
+
+    </section>
+
+</main>
+
+
+
+<!-- ================= BOOKING MODAL ================= -->
+
+<div
+    class="modal-overlay"
+    id="bookingModal">
+
+    <div class="modal-box">
+
+        <h3>
+            Book Vehicle
+        </h3>
+
+        <p
+            id="modalVehicleName"
+            class="modal-vehicle-name">
+        </p>
+
+
+        <div class="input-box">
+
+            <label>
+                Pickup Date
+            </label>
+
+            <input
+                type="date"
+                id="fromDate"
+                required>
+
+        </div>
+
+
+        <div class="input-box">
+
+            <label>
+                Drop Date
+            </label>
+
+            <input
+                type="date"
+                id="toDate"
+                required>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="btn-cancel"
+                id="modalCancel">
+
+                Cancel
+
+            </button>
+            <button
+                class="btn-confirm"
+                id="modalConfirm">
+                Confirm Booking
+            </button>
+        </div>
+    </div>
+</div>
+<footer>
+    <p>&copy;2026 Wheels4U. All Rights Reserved.</p>
+</footer>
+<script src="js/auth.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+
+</html>

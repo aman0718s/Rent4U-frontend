@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Vehicle - Wheels4U</title>
+    <link rel="stylesheet" href="css/vehicle-listing.css">
+    <script src="js/auth.js"></script>
+    <script>
+        window.location.href = (typeof isAuthenticated === "function" && isAuthenticated()) 
+            ? "dashboard.html#browse" 
+            : "login.html";
+    </script>
+</head>
+<body>
+    <p style="text-align: center; padding: 50px; font-family: sans-serif;">Redirecting to vehicles...</p>
+</body>
+</html>
