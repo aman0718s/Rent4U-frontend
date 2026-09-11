@@ -29,7 +29,7 @@ if (logoutBtn) {
         } else {
             localStorage.removeItem("token");
             localStorage.removeItem("loggedIn");
-            window.location.href = "login.html";
+            window.location.href = "index.html";
         }
     });
 }
